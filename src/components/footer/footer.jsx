@@ -7,7 +7,7 @@ const Footer = () => {
         <FaSquareGithub className="text-gray-200 text-xl mr-2" />
         <p className="my-6 text-gray-200 hover:underline">
           <a href="https://github.com/chingu-voyages/v45-tier2-team-20">
-            https://github.com/chingu-voyages/v45-tier2-team-20
+            Team project github repository
           </a>
         </p>
       </div>
