@@ -6,6 +6,13 @@ export default {
       colors: {
         primary: "#5955DF",
       },
+      backgroundImage: {
+        "starting-banner": 'url("../public/banner-image.jpg")',
+      },
+      fontFamily: {
+        spaceGrotesk: ["Space Grotesk", "sans-serif"],
+        robotoSlab: ["Roboto Slab", "sans-serif"],
+      },
     },
   },
   plugins: [],
