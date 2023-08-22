@@ -26,7 +26,7 @@ const LandingPage = () => {
           <Link
             className="bg-indigo-800 self-start px-5 py-3 inline-block rounded-xl hover:sm:scale-[1.1] text-center
      transition duration-[350ms] ease-in-out uppercase tracking-[1.5px] text-2xl w-full sm:w-auto font-robotoSlab"
-            to={"/"}
+            to={"/searchpage"}
           >
             Start exploring
           </Link>
@@ -46,7 +46,7 @@ const LandingPage = () => {
             className="bg-indigo-800 self-start flex items-center text-center justify-center px-10 aspect-square mx-auto sm:ml-auto 
       hover:sm:scale-[1.1] rounded-full
     transition duration-[350ms] ease-in-out uppercase tracking-[1.5px] text-3xl w-full sm:w-auto max-w-[300px] mt-10 sm:mt-0 font-robotoSlab"
-            to={"/"}
+            to={"/searchpage"}
           >
             Start <br /> exploring
           </Link>
