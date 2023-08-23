@@ -7,7 +7,7 @@ export default {
         primary: "#5955DF",
       },
       backgroundImage: {
-        "starting-banner": 'url("../public/banner-image.jpg")',
+        "starting-banner": 'url("../banner-image.jpg")',
       },
       fontFamily: {
         spaceGrotesk: ["Space Grotesk", "sans-serif"],
