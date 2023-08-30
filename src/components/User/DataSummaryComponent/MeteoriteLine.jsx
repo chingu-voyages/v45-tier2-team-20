@@ -30,9 +30,9 @@ export const MeteoriteLine = ({ data }) => {
     findCountry();
   }, [data]);
   return (
-    <Link to={`/metheroite/${data.id}`}>
+    <Link to={`/meteorite/${data.id}`}>
       <div className="w-full border-[1px] border-gray-300 flex p-5 rounded-md cursor-pointer hover:shadow-lg duration-100">
-        <div>
+        <div className="w-full">
           <div className="flex items-center space-x-6 mb-4 justify-between">
             {/* <div className={`w-24 h-24 bg-[#E7E7F0] rounded-md`}></div> */}
             <h2 className="text-black text-3xl font-semibold">{data.name}</h2>

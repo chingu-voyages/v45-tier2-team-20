@@ -1,6 +1,7 @@
 import { SearchComponent } from "../components/User/SearchComponent/SearchComponent";
 import { Card } from "../components/UI/Card";
 import { DataListComponent } from "../components/User/DataSummaryComponent/DataListComponent";
+import {MetricsComponent} from "../components/User/MetricsComponent/MetricsComponent.jsx";
 
 export const SearchPage = () => {
   return (
@@ -13,7 +14,7 @@ export const SearchPage = () => {
 
       <DataListComponent />
 
-      {/* <MetricsComponent /> */}
+      {/*<MetricsComponent />*/}
     </div>
   );
 };
