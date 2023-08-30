@@ -131,13 +131,13 @@ const MetheroiteDetailPage = () => {
     ],
   };
   return (
-    <div className=" text-white mb-auto bg-blue-400">
+    <div className="mb-auto bg-white min-h-screen">
       {/* <SearchBar /> */}
-      <p>
+      <p className="text-black">
         TOTAL METHEROTIE MASS__
         {averageMetheroiteWeight.toLocaleString("en-US")} kg
       </p>
-      <p>
+      <p className="text-black">
         AVERAGE METHEROTIE MASS__
         {(averageMetheroiteWeight / metheroite.length).toLocaleString(
           "en-US"
@@ -147,7 +147,7 @@ const MetheroiteDetailPage = () => {
       {geoDataCountry && (
         <div className="max-w-[590px] mx-auto px-4">
           <div className="flex items-center mb-5">
-            <h1 className="text-4xl">{detailMetheroite.name}</h1>
+            <h1 className="text-4xl text-black">{detailMetheroite.name}</h1>
             <p className="bg-blue-700 rounded-xl px-4 ml-5">
               {detailMetheroite.id}
             </p>
