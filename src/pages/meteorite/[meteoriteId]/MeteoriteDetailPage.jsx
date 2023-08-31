@@ -12,6 +12,8 @@ export const MeteoriteDetailPage = () => {
   const [loading, setLoading] = useState(false);
   const params = useParams();
 
+  const [allData, setAllData] = useState(0)
+
   const getMeteorite = () => {
     setLoading(true);
     axios
@@ -19,6 +21,7 @@ export const MeteoriteDetailPage = () => {
       .then((res) => {
         const meteorite = res.data.find(item => item.id === params.meteoriteId)
         setData(meteorite);
+        setAllData(res.data)
         setLoading(false);
       });
 
@@ -31,7 +34,7 @@ export const MeteoriteDetailPage = () => {
   return (
     <div className="mb-auto">
       <div className="flex justify-between gap-4 my-[120px] px-[20px]">
-        <Card className="shadow-lg shadow-indigo-300 w-[40%] mx-auto">
+        <Card className="shadow-lg shadow-indigo-300 w-[50%] mx-auto">
           <div>
             {loading && (
               <MeteoriteLineLoading />
@@ -45,7 +48,7 @@ export const MeteoriteDetailPage = () => {
             )}
           </div>
         </Card>
-        <MetricsComponentDetail data={data}/>
+        <MetricsComponentDetail data={data} allData={allData}/>
       </div>
     </div>
   )
