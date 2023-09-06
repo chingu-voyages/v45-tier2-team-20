@@ -14,7 +14,7 @@ export const SearchPage = () => {
 
       <DataListComponent />
 
-      {/*<MetricsComponent />*/}
+      <MetricsComponent />
     </div>
   );
 };
