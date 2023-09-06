@@ -1,7 +1,7 @@
 import { Card } from "../../UI/Card";
-import { Button } from "../../UI/Button";
+//import { Button } from "../../UI/Button";
 import { useEffect, useState, useMemo } from "react";
-import { HiChevronUp, HiChevronDown } from "react-icons/hi2";
+//import { HiChevronUp, HiChevronDown } from "react-icons/hi2";
 import { MeteoriteLine } from "./MeteoriteLine";
 import { MeteoriteLineLoading } from "./MeteoriteLineLoading";
 import { Pagination } from "../../UI/Pagination/Pagination";
@@ -12,7 +12,7 @@ import axios from "axios";
 export const DataListComponent = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [toggle, setToggle] = useState(false);
+  // const [toggle, setToggle] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
 
