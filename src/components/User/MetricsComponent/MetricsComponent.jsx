@@ -10,6 +10,7 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import {useEffect, useState} from "react";
+import {GeoChart} from "./GeoChart.jsx";
 
 ChartJS.register(
   CategoryScale,
@@ -63,6 +64,7 @@ export const MetricsComponent = () => {
   }, []);
 
   useEffect(() => {
+    // console.log('meth', metheroite.sort((a,b) => a.mass - b.mass))
     const countByYear = {};
     metheroite.map((item) => {
       countByYear[new Date(item.year).getFullYear()] =
@@ -99,11 +101,13 @@ export const MetricsComponent = () => {
   };
 
   return (
-    <div className="flex justify-between my-[120px] px-[20px]">
+    <div className="my-[120px] px-[20px]">
       <Card className="shadow-md shadow-indigo-200 w-full text-black p-2">
         <Bar options={yearOptions} data={yearData} className="mb-4" />
         <Bar options={classOptions} data={classData} />
       </Card>
+
+      <GeoChart />
     </div>
   )
 }

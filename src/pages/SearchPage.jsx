@@ -15,6 +15,7 @@ export const SearchPage = () => {
       <DataListComponent />
 
       <MetricsComponent />
+
     </div>
   );
 };
