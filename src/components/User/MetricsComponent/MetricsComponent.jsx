@@ -63,6 +63,7 @@ export const MetricsComponent = () => {
   }, []);
 
   useEffect(() => {
+    console.log('meth', metheroite.sort((a,b) => a.mass - b.mass))
     const countByYear = {};
     metheroite.map((item) => {
       countByYear[new Date(item.year).getFullYear()] =
