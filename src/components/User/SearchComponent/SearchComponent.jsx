@@ -4,22 +4,24 @@ import { Input } from "../../UI/Input";
 import { Button } from "../../UI/Button";
 import { BsSearch } from "react-icons/bs";
 import { IoCloseCircle } from "react-icons/io5";
-
-import { GetApiData } from "../../../data/GetApiData";
+import { useApi } from "../../../contexts/APIcontext";
 
 export const SearchComponent = () => {
-    const [searchInputValue, setSearchInputValue] = useState("");
-    const { meteoriteData } = GetApiData();
+    const [name, setName] = useState([]);
+    const [yearOfStrike, setYearOfStrike] = useState([]);
+    const [meteoriteComposition, setMeteoriteComposition] = useState([]);
+    const [massRange, setMassRange] = useState([]);
 
-    const filteredListOfMeteoriteNameData = meteoriteData.filter((meteorite) => {
-        return meteorite.name.toLowerCase().includes(searchInputValue.toLowerCase());
-    })
+    const { meteoriteData, searchInputValue, setSearchInputValue } = useApi();
 
-    const handleSubmit = (e) => {
+    // const filteredListOfMeteoriteNameData = meteoriteData.filter((meteorite) => {
+    //     return meteorite.name.toLowerCase().includes(searchInputValue.toLowerCase());
+    // })
+
+    const handleOnSubmit = (e) => {
         e.preventDefault();
-        console.log("meteoriteData: ", meteoriteData);
-        console.log("searchInputValue: ", searchInputValue);
         setSearchInputValue(searchInputValue);
+        console.log("searchInputValue: ", searchInputValue);
     }
 
     const handleOnChange = (e) => {
@@ -31,11 +33,6 @@ export const SearchComponent = () => {
         setSearchInputValue(e.target.value = "");
         console.log("Clear input value: ", e.target.value);
     }
-
-    const [name, setName] = useState([]);
-    const [yearOfStrike, setYearOfStrike] = useState([]);
-    const [meteoriteComposition, setMeteoriteComposition] = useState([]);
-    const [massRange, setMassRange] = useState([]);
 
     useEffect(() => {
         const getName = [];
@@ -72,7 +69,7 @@ export const SearchComponent = () => {
 
     return (
         <section className="flex flex-col justify-between">
-            <form className="flex flex-col space-y-3 mt-1 px-6 pt-6 md:flex-row md:space-x-6 md:space-y-0 md:pt-8" onSubmit={handleSubmit}>
+            <form className="flex flex-col space-y-3 mt-1 px-6 pt-6 md:flex-row md:space-x-6 md:space-y-0 md:pt-8" onSubmit={handleOnSubmit}>
                 <section className="relative flex-1 justify-center">
                     <Label htmlFor="search" className="sr-only" text="Search"></Label>
                     <BsSearch style={{ color: "rgb(99 102 241)", height: "20px", width: "20px", position: "absolute", top: "34%", left: "2%" }} />
@@ -92,6 +89,16 @@ export const SearchComponent = () => {
                 <Button text="Meteorite Composition" type="button" className="border-solid border-2 border-indigo-400 rounded-md hover:text-slate-800 hover:border-indigo-900 focus:border-transparent focus:ring-2 focus:outline-none focus:ring-indigo-900 focus:text-slate-800 px-6 py-1 mt-3 md:mt-0" onClick={handleOnClickMeteoriteComposition} />
                 <Button text="Mass range" type="button" className="border-solid border-2 border-indigo-400 rounded-md hover:text-slate-800 hover:border-indigo-900 focus:border-transparent focus:ring-2 focus:outline-none focus:ring-indigo-900 focus:text-slate-800 px-6 py-1 mt-3 md:mt-0" onClick={handleOnClickMassRangeInKilograms} />
             </section>
+
+            {/* <section className="mt-12">
+                {filteredListOfMeteoriteNameData.map((meteor) => {
+                    return (
+                        <>
+                            <p key={meteor.id} className="text-indigo-700">{meteor.name} {new Date(meteor.year).getFullYear()} {(meteor.mass) / 1000} {meteor.recclass}</p>
+                        </>
+                    )
+                })}
+            </section> */}
         </section>
     )
 }
