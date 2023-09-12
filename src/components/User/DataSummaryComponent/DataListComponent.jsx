@@ -18,6 +18,8 @@ export const DataListComponent = () => {
 
   const PageSize = 9;
 
+  const NUMBER = 1000;
+
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
@@ -26,15 +28,13 @@ export const DataListComponent = () => {
 
   const getAllMeteorite = () => {
     setLoading(true);
-    setTimeout(() => {
-      axios
-        .get(PUBLIC_API_URL, { $$app_token: APP_TOKEN, $limit: 10 })
-        .then((res) => {
-          setLoading(false);
-          setData(res.data);
-          setLoading(false);
-        });
-    }, 2000);
+    axios
+      .get(`${PUBLIC_API_URL}?$limit=${NUMBER}&$$app_token=${APP_TOKEN}`)
+      .then((res) => {
+        setLoading(false);
+        setData(res.data);
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
