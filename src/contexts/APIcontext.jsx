@@ -11,7 +11,7 @@ export function useApi() {
 
 export function ApiContextProvider({ children }) {
     const [meteoriteData, setMeteoriteData] = useState([]);
-    const [searchInputValue, setSearchInputValue] = useState("");
+    const [searchInputValue, setSearchInputValue] = useState(meteoriteData);
 
     const getMeteoriteDataWithAxios = async () => {
         const response = await axios.get(PUBLIC_API_URL, { $$app_token: APP_TOKEN });
