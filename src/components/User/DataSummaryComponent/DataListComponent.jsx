@@ -8,9 +8,11 @@ import { Pagination } from "../../UI/Pagination/Pagination";
 import { PUBLIC_API_URL, APP_TOKEN } from "../../../constants/urls";
 import { ToggleButton } from "../../UI/ToggleButton";
 import axios from "axios";
+import { useApiContext } from "../../../contexts/APIcontext";
 
 export const DataListComponent = () => {
-  const [data, setData] = useState([]);
+  const { filteredSearchInput } = useApiContext();
+  // const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [toggle, setToggle] = useState(false);
 
@@ -21,8 +23,8 @@ export const DataListComponent = () => {
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
-    return data.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage, data]);
+    return filteredSearchInput.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, filteredSearchInput]);
 
   const getAllMeteorite = () => {
     setLoading(true);
@@ -31,7 +33,7 @@ export const DataListComponent = () => {
         .get(PUBLIC_API_URL, { $$app_token: APP_TOKEN, $limit: 10 })
         .then((res) => {
           setLoading(false);
-          setData(res.data);
+          // setData(res.data);
           setLoading(false);
         });
     }, 2000);
@@ -46,7 +48,7 @@ export const DataListComponent = () => {
       <Card className="shadow-md shadow-indigo-200 w-full">
         <div className="block md:flex md:space-y-3 justify-between items-center pb-5 p-3">
           <h3 className="font-semibold text-black text-2xl">
-            #{data.length} Meteorites strikes
+            #{filteredSearchInput.length} Meteorites strikes
           </h3>
           <div className="flex">
             <ToggleButton name={"Name"} />
@@ -68,7 +70,7 @@ export const DataListComponent = () => {
           )}
           {!loading && (
             <>
-              {data.length > 0 &&
+              {filteredSearchInput.length > 0 &&
                 currentTableData.map((item) => (
                   <MeteoriteLine key={item.id} data={item} />
                 ))}
@@ -78,7 +80,7 @@ export const DataListComponent = () => {
         <div className="flex p-3 justify-center">
           <Pagination
             currentPage={currentPage}
-            totalCount={data.length}
+            totalCount={filteredSearchInput.length}
             pageSize={PageSize}
             onPageChange={(page) => setCurrentPage(page)}
           />

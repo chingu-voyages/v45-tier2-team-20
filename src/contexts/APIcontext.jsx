@@ -5,13 +5,13 @@ import { APP_TOKEN, PUBLIC_API_URL } from "../constants/urls";
 
 const ApiContext = createContext();
 
-export function useApi() {
+export function useApiContext() {
     return useContext(ApiContext);
 }
 
 export function ApiContextProvider({ children }) {
     const [meteoriteData, setMeteoriteData] = useState([]);
-    const [searchInputValue, setSearchInputValue] = useState(meteoriteData);
+    const [filteredSearchInput, setfilteredSearchInput] = useState(meteoriteData);
 
     const getMeteoriteDataWithAxios = async () => {
         const response = await axios.get(PUBLIC_API_URL, { $$app_token: APP_TOKEN });
@@ -23,7 +23,7 @@ export function ApiContextProvider({ children }) {
     }, []);
 
     return (
-        <ApiContext.Provider value={{ meteoriteData, searchInputValue, setSearchInputValue }}>
+        <ApiContext.Provider value={{ meteoriteData, filteredSearchInput, setfilteredSearchInput }}>
             {children}
         </ApiContext.Provider>
     );
