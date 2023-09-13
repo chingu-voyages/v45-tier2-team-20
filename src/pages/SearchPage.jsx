@@ -3,6 +3,7 @@ import { Card } from "../components/UI/Card";
 import { DataListComponent } from "../components/User/DataSummaryComponent/DataListComponent";
 import { MetricsComponent } from "../components/User/MetricsComponent/MetricsComponent.jsx";
 import { ApiContextProvider } from "../contexts/APIcontext";
+import { SummaryMetricComponent } from "../components/User/SummaryMetricComponent/SummaryMetricComponent";
 
 export const SearchPage = () => {
   return (
@@ -13,9 +14,8 @@ export const SearchPage = () => {
             <SearchComponent />
           </Card>
         </div>
-
         <DataListComponent />
-
+        <SummaryMetricComponent />
         <MetricsComponent />
       </div>
     </ApiContextProvider>
