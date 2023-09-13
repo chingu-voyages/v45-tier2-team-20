@@ -9,7 +9,7 @@ export const SearchPage = () => {
     <ApiContextProvider>
       <div className="w-full min-h-screen content-center bg-[#F7FAFF]">
         <div className="relative bg-indigo-700 h-56">
-          <Card className="absolute mx-auto shadow-lg shadow-indigo-300 min-h-[15vh] w-[90%] top-[8vh] left-0 right-0 md:h-[15vh] md:w-[50%]">
+          <Card className="absolute mx-auto shadow-lg shadow-indigo-300 min-h-[22vh] w-[90%] top-[20%] left-0 right-0 md:w-[90%] md:top-[40%] lg:w-[50%] lg:top-[60%] lg:min-h-[15vh]">
             <SearchComponent />
           </Card>
         </div>
