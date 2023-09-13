@@ -3,9 +3,8 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 // Page component
 import LandingPage from "../pages/LandingPage";
 import { SearchPage } from "../pages/SearchPage";
-import MetheroiteDetailPage from "../pages/metheroite/[metheroiteId]/MetheroiteDetailPage";
 import LayoutPage from "../pages/LayoutPage";
-import {MeteoriteDetailPage} from "../pages/meteorite/[meteoriteId]/MeteoriteDetailPage.jsx";
+import { MeteoriteDetailPage } from "../pages/meteorite/[meteoriteId]/MeteoriteDetailPage.jsx";
 // import { Navbar } from "../components/UI/Navbar";
 
 export default function Routers() {
@@ -16,10 +15,6 @@ export default function Routers() {
         <Route element={<LayoutPage />}>
           <Route index path="/" element={<LandingPage />} />
           <Route path="/searchpage" element={<SearchPage />} />
-          <Route
-            path="/metheroite/:metheroiteId"
-            element={<MetheroiteDetailPage />}
-          />
           <Route
             path="/meteorite/:meteoriteId"
             element={<MeteoriteDetailPage />}
