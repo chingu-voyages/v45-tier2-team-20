@@ -11,6 +11,7 @@ import {
 import { Bar } from "react-chartjs-2";
 import {useEffect, useState} from "react";
 import {GeoChart} from "./GeoChart.jsx";
+import {useApiContext} from "../../../contexts/APIcontext.jsx";
 
 ChartJS.register(
   CategoryScale,
@@ -33,6 +34,9 @@ const yearOptions = {
       text: "Number of strikes by year",
     },
   },
+  ticks: {
+    precision: 0
+  }
 };
 
 const classOptions = {
@@ -47,36 +51,30 @@ const classOptions = {
       text: "Number of strikes by recClass",
     },
   },
+  ticks: {
+    precision: 0
+  }
 };
 
 
 export const MetricsComponent = () => {
   const [strikeByYear, setStrikeByYear] = useState([{}]);
   const [strikeByClass, setStrikeByClass] = useState([{}]);
-  const [metheroite, setMetheroite] = useState([]);
+  const { filteredSearchInput } = useApiContext();
 
   useEffect(() => {
-    fetch("https://data.nasa.gov/resource/gh4g-9sfh.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setMetheroite(data); // all metheroites
-      });
-  }, []);
-
-  useEffect(() => {
-    // console.log('meth', metheroite.sort((a,b) => a.mass - b.mass))
     const countByYear = {};
-    metheroite.map((item) => {
+    filteredSearchInput.map((item) => {
       countByYear[new Date(item.year).getFullYear()] =
         (countByYear[new Date(item.year).getFullYear()] || 0) + 1;
     });
     setStrikeByYear(countByYear); // prepare object to the strike by year graph
     const countByClass = {};
-    metheroite.map((item) => {
+    filteredSearchInput.map((item) => {
       countByClass[item.recclass] = (countByClass[item.recclass] || 0) + 1;
     });
     setStrikeByClass(countByClass); // prepare object to the strike by recclass graph
-  }, [metheroite])
+  }, [filteredSearchInput])
 
   const yearData = {
     datasets: [
@@ -101,13 +99,12 @@ export const MetricsComponent = () => {
   };
 
   return (
-    <div className="my-[120px] px-[20px]">
+    <div className="mb-[120px] mt-[-120px] px-[20px]">
+      <GeoChart />
       <Card className="shadow-md shadow-indigo-200 w-full text-black p-2">
         <Bar options={yearOptions} data={yearData} className="mb-4" />
         <Bar options={classOptions} data={classData} />
       </Card>
-
-      <GeoChart />
     </div>
   )
 }
