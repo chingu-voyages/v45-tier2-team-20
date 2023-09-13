@@ -19,6 +19,7 @@ export const SearchComponent = () => {
         composition: "",
         mass: "",
     });
+    const [isDefaultSearchOption, setIsDefaultSearchOption] = useState(true);
 
     useEffect(() => {
         const name = searchInputValue.name;
@@ -39,18 +40,18 @@ export const SearchComponent = () => {
             return ((meteorite.mass) / 1000).toString().includes(massValue);
         })
         setfilteredSearchInput(searchedResult);
-    }, [meteoriteData, searchInputValue.name, searchInputValue.year, searchInputValue.composition, searchInputValue.mass, setfilteredSearchInput])
+    }, [meteoriteData, searchInputValue.name, searchInputValue.year, searchInputValue.composition, searchInputValue.mass, setfilteredSearchInput]);
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
         setSearchInputValue(searchInputValue);
         console.log("searchInputValue: ", searchInputValue);
-    }
+    };
 
     const handleOnChange = (e) => {
         setSearchInputValue((prev) => ({ ...prev, [`${e.target.id}`]: e.target.value }));
         console.log("Input value: ", searchInputValue);
-    }
+    };
 
     const clearSearchInputValue = () => {
         setSearchInputValue({
@@ -60,23 +61,26 @@ export const SearchComponent = () => {
             mass: "",
         });
         console.log("Clear input value: ", searchInputValue);
-    }
+    };
 
     const handleOnClickName = () => {
         setInputAttributes(inputAttributesSwitch("name"));
-    }
+    };
 
     const handleOnClickYearOfStrike = () => {
+        setIsDefaultSearchOption(false);
         setInputAttributes(inputAttributesSwitch("year"));
-    }
+    };
 
     const handleOnClickMeteoriteComposition = () => {
+        setIsDefaultSearchOption(false);
         setInputAttributes(inputAttributesSwitch("composition"));
-    }
+    };
 
     const handleOnClickMassRangeInKilograms = () => {
+        setIsDefaultSearchOption(false);
         setInputAttributes(inputAttributesSwitch("mass"));
-    }
+    };
 
     const inputAttributesSwitch = (value) => {
         switch (value) {
@@ -105,29 +109,30 @@ export const SearchComponent = () => {
                     placeholder: "Search by meteorite mass range (Ex: 1.44)"
                 }
         }
-    }
+    };
 
     return (
         <section className="flex flex-col justify-between">
             <form className="flex flex-col space-y-3 mt-1 px-6 pt-6 md:flex-row md:space-x-6 md:space-y-0 md:pt-8" onSubmit={handleOnSubmit}>
                 <section className="relative flex-1 justify-center">
                     <Label htmlFor="search" className="sr-only" text="Search"></Label>
-                    <BsSearch style={{ color: "rgb(99 102 241)", height: "20px", width: "20px", position: "absolute", top: "34%", left: "3%" }} />
-                    <Input type="text" className="p-4 pl-12 pr-14 text-md text-slate-800 rounded-lg bg-white focus:ring-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500  placeholder-gray-400 shadow-md shadow-indigo-200 w-full md:text-lg md:pl-14 md:pr-20" {...inputAttributes} onChange={handleOnChange} required />
+                    <span className="absolute top-[32%] left-[4%] md:left-[5%] lg:left-[3%]">
+                        <BsSearch style={{ color: "rgb(99 102 241)", height: "20px", width: "20px" }} />
+                    </span>
+                    <Input type="text" className="p-4 pl-12 pr-14 text-md text-slate-800 rounded-lg bg-white focus:ring-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500  placeholder-gray-400 shadow-md shadow-indigo-200 w-full md:text-lg md:pl-0 md:pr-12 lg:pl-16 lg:pr-20" {...inputAttributes} onChange={handleOnChange} required />
+                    <span className="absolute top-[24%] right-[5%] lg:right-[3%]" onClick={clearSearchInputValue}>
+                        <IoCloseCircle style={{ color: "rgb(99 102 241)", height: "30px", width: "30px" }} />
+                    </span>
                 </section>
 
                 <Button type="submit" className="text-md text-slate-200 font-semibold rounded-full bg-indigo-500 border-indigo-700 hover:bg-indigo-600 focus:ring-2 focus:outline-none focus:ring-indigo-900 focus:bg-indigo-200 focus:text-slate-800 py-3 md:px-8 md:py-4" text="Search" />
             </form>
 
-            <Button className="absolute top-[4vh] right-[11vw]" onClick={clearSearchInputValue}>
-                <IoCloseCircle style={{ color: "rgb(99 102 241)", height: "30px", width: "30px" }} />
-            </Button>
-
             <section className="flex flex-wrap justify-center gap-2 p-4 text-md font-semibold text-indigo-500 md:pl-6 md:justify-start md:pt-6">
-                <Button text="Name" type="button" className="border-solid border-2 border-indigo-400 rounded-md hover:text-slate-800 hover:border-indigo-900 focus:border-transparent focus:ring-2 focus:outline-none focus:ring-indigo-900 focus:text-slate-800 px-6 py-1 mt-3 md:mt-0" onClick={handleOnClickName} />
-                <Button text="Year of strike" type="button" className="border-solid border-2 border-indigo-400 rounded-md hover:text-slate-800 hover:border-indigo-900 focus:border-transparent focus:ring-2 focus:outline-none focus:ring-indigo-900 focus:text-slate-800 px-6 py-1 mt-3 md:mt-0" onClick={handleOnClickYearOfStrike} />
-                <Button text="Meteorite Composition" type="button" className="border-solid border-2 border-indigo-400 rounded-md hover:text-slate-800 hover:border-indigo-900 focus:border-transparent focus:ring-2 focus:outline-none focus:ring-indigo-900 focus:text-slate-800 px-6 py-1 mt-3 md:mt-0" onClick={handleOnClickMeteoriteComposition} />
-                <Button text="Mass range" type="button" className="border-solid border-2 border-indigo-400 rounded-md hover:text-slate-800 hover:border-indigo-900 focus:border-transparent focus:ring-2 focus:outline-none focus:ring-indigo-900 focus:text-slate-800 px-6 py-1 mt-3 md:mt-0" onClick={handleOnClickMassRangeInKilograms} />
+                <Button text="Name" type="button" className={`border-solid border-2 border-indigo-400 rounded-md hover:text-slate-800 hover:border-indigo-900 focus:border-transparent focus:ring-2 focus:outline-none focus:ring-indigo-900 focus:text-slate-800 focus:bg-indigo-200 px-6 py-1 mt-3 md:mt-0 ${isDefaultSearchOption ? 'bg-indigo-200 text-slate-800 ring-2 ring-indigo-900 outline-none border-transparent' : ''}`} onClick={handleOnClickName} />
+                <Button text="Year of strike" type="button" className="border-solid border-2 border-indigo-400 rounded-md hover:text-slate-800 hover:border-indigo-900 focus:border-transparent focus:ring-2 focus:outline-none focus:ring-indigo-900 focus:text-slate-800 focus:bg-indigo-200 px-6 py-1 mt-3 md:mt-0" onClick={handleOnClickYearOfStrike} />
+                <Button text="Meteorite Composition" type="button" className="border-solid border-2 border-indigo-400 rounded-md hover:text-slate-800 hover:border-indigo-900 focus:border-transparent focus:ring-2 focus:outline-none focus:ring-indigo-900 focus:text-slate-800 focus:bg-indigo-200 px-6 py-1 mt-3 md:mt-0" onClick={handleOnClickMeteoriteComposition} />
+                <Button text="Mass range" type="button" className="border-solid border-2 border-indigo-400 rounded-md hover:text-slate-800 hover:border-indigo-900 focus:border-transparent focus:ring-2 focus:outline-none focus:ring-indigo-900 focus:text-slate-800 focus:bg-indigo-200 px-6 py-1 mt-3 md:mt-0" onClick={handleOnClickMassRangeInKilograms} />
             </section>
         </section>
     )
