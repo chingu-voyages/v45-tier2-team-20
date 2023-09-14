@@ -16,14 +16,19 @@ export const MeteoriteLine = ({ data }) => {
   const [loading, setLoading] = useState(false);
   const findCountry = () => {
     setLoading(true);
-    axios
-      .get(
-        `https://api.geoapify.com/v1/geocode/reverse?lat=${data.geolocation.latitude}&lon=${data.geolocation.longitude}&format=json&apiKey=1c6480fe81734704bb23de7a30a2a769`
-      )
-      .then((res) => {
-        setCountry(res.data.results[0].country);
-        setLoading(false);
-      });
+    if (data.reclong) {
+      axios
+        .get(
+          `https://api.geoapify.com/v1/geocode/reverse?lat=${data.reclat}&lon=${data.reclong}&format=json&apiKey=1c6480fe81734704bb23de7a30a2a769`
+        )
+        .then((res) => {
+          setCountry(res.data.results[0].country);
+          setLoading(false);
+        });
+    } else {
+      setCountry("no location");
+      setLoading(false);
+    }
   };
   useEffect(() => {
     findCountry();
