@@ -20,6 +20,7 @@ export const SearchComponent = () => {
         mass: "",
     });
     const [isDefaultSearchOption, setIsDefaultSearchOption] = useState(true);
+    const [currentInputValue, setCurrentInputValue] = useState("");
 
     useEffect(() => {
         const name = searchInputValue.name;
@@ -45,12 +46,11 @@ export const SearchComponent = () => {
     const handleOnSubmit = (e) => {
         e.preventDefault();
         setSearchInputValue(searchInputValue);
-        console.log("searchInputValue: ", searchInputValue);
     };
 
     const handleOnChange = (e) => {
         setSearchInputValue((prev) => ({ ...prev, [`${e.target.id}`]: e.target.value }));
-        console.log("Input value: ", searchInputValue);
+        setCurrentInputValue(e.target.value);
     };
 
     const clearSearchInputValue = () => {
@@ -60,26 +60,30 @@ export const SearchComponent = () => {
             composition: "",
             mass: "",
         });
-        console.log("Clear input value: ", searchInputValue);
+        setCurrentInputValue("");
     };
 
     const handleOnClickName = () => {
         setInputAttributes(inputAttributesSwitch("name"));
+        setCurrentInputValue(searchInputValue.name);
     };
 
     const handleOnClickYearOfStrike = () => {
         setIsDefaultSearchOption(false);
         setInputAttributes(inputAttributesSwitch("year"));
+        setCurrentInputValue(searchInputValue.year);
     };
 
     const handleOnClickMeteoriteComposition = () => {
         setIsDefaultSearchOption(false);
         setInputAttributes(inputAttributesSwitch("composition"));
+        setCurrentInputValue(searchInputValue.composition);
     };
 
     const handleOnClickMassRangeInKilograms = () => {
         setIsDefaultSearchOption(false);
         setInputAttributes(inputAttributesSwitch("mass"));
+        setCurrentInputValue(searchInputValue.mass);
     };
 
     const inputAttributesSwitch = (value) => {
@@ -119,7 +123,7 @@ export const SearchComponent = () => {
                     <span className="absolute top-[32%] left-[4%] md:left-[5%] lg:left-[3%]">
                         <BsSearch style={{ color: "rgb(99 102 241)", height: "20px", width: "20px" }} />
                     </span>
-                    <Input type="text" className="p-4 pl-12 pr-14 text-md text-slate-800 rounded-lg bg-white focus:ring-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500  placeholder-gray-400 shadow-md shadow-indigo-200 w-full md:text-lg md:pl-0 md:pr-12 lg:pl-16 lg:pr-20" {...inputAttributes} onChange={handleOnChange} required />
+                    <Input type="text" className="p-4 pl-12 pr-14 text-md text-slate-800 rounded-lg bg-white focus:ring-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500  placeholder-gray-400 shadow-md shadow-indigo-200 w-full md:text-lg md:pl-0 md:pr-12 lg:pl-16 lg:pr-20" {...inputAttributes} onChange={handleOnChange} value={currentInputValue} required />
                     <span className="absolute top-[24%] right-[5%] lg:right-[3%]" onClick={clearSearchInputValue}>
                         <IoCloseCircle style={{ color: "rgb(99 102 241)", height: "30px", width: "30px" }} />
                     </span>
