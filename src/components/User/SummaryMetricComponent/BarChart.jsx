@@ -136,11 +136,10 @@ export default function BarChart({ searchedMetheroite, metheroite }) {
                 <button
                   onClick={() => changeTab(tab.code)}
                   key={tab.code}
-                  className={`text-indigo-600 rounded-md px-[16px] w-full mb-4 sm:w-auto py-[4px] border border-indigo-600 font-medium focus:ring-indigo-500 focus:text-slate-800 focus:border-transparent focus:ring-2 focus:outline-none hover:bg-gray-100  ${
-                    tabContent === tab.code
-                      ? "border-red-400 text-red-400"
-                      : "border-indigo-400"
-                  }`}
+                  className={`text-indigo-500 rounded-md px-[16px] w-full mb-4 sm:w-auto py-[4px] border-2 border-indigo-400 font-medium hover:bg-gray-100 hover:text-slate-800 hover:border-indigo-900 focus:border-transparent focus:ring-2 focus:outline-none focus:ring-indigo-900 focus:text-slate-800 focus:bg-indigo-200 ${tabContent === tab.code
+                    ? "bg-indigo-200 border-indigo-900 text-slate-800"
+                    : ""
+                    }`}
                 >
                   {tab.name}
                 </button>
