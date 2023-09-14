@@ -43,7 +43,6 @@ export const DataListComponent = () => {
       });
     }
 
-    console.log(sortedData); // Check the sorted data
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
     return sortedData.slice(firstPageIndex, lastPageIndex);

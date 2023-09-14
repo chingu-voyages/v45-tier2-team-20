@@ -15,8 +15,8 @@ export const SearchPage = () => {
             <SearchComponent />
           </Card>
         </div>
+        <DataListComponent />
         <Suspense fallback={"Loading meteor data..."}>
-          <DataListComponent />
           <SummaryMetricComponent />
           <MetricsComponent />
         </Suspense>
