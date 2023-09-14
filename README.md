@@ -92,4 +92,4 @@ https://fireball-meteorite-strikes-app.netlify.app/
 
 - Screenshot of the project
 
-![](./Fireball Meteorite Strikes.png)
+![](./FireballMeteoriteStrikes.png)
