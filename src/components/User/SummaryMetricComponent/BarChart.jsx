@@ -37,6 +37,9 @@ export default function BarChart({ searchedMetheroite, metheroite }) {
         text: "Number of strikes by year",
       },
     },
+    ticks: {
+      precision: 0
+    }
   };
 
   const classData = {
@@ -88,6 +91,9 @@ export default function BarChart({ searchedMetheroite, metheroite }) {
         text: tabs.find((item) => item.code === tabContent).name,
       },
     },
+    ticks: {
+      precision: 0
+    }
   };
   useEffect(() => {
     let notNumberCount = 0;
