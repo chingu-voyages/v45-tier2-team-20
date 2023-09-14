@@ -37,7 +37,7 @@ export const Pagination = (props) => {
         <li disabled={currentPage === 1} onClick={onPrevious}>
           <a
             href="#"
-            className="flex items-center justify-center px-4 h-10 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            className="flex items-center justify-center px-4 h-10 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white focus:ring-2 focus:ring-indigo-900 focus:bg-indigo-200 focus:text-slate-800"
           >
             <span className="sr-only">Previous</span>
             <svg
@@ -64,7 +64,7 @@ export const Pagination = (props) => {
                 <a
                   href="#"
                   aria-current="page"
-                  className="z-10 flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                  className="z-10 flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white focus:ring-2 focus:ring-indigo-900 focus:bg-indigo-200 focus:text-slate-800"
                 >
                   ...
                 </a>
@@ -77,11 +77,10 @@ export const Pagination = (props) => {
               <a
                 href="#"
                 aria-current="page"
-                className={`z-10 flex items-center justify-center px-4 h-10 leading-tight ${
-                  pageNumber === currentPage
-                    ? "text-indigo-600 border border-indigo-300 bg-indigo-50 hover:bg-indigo-100 hover:text-indigo-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
-                    : "text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                }`}
+                className={`z-10 flex items-center justify-center px-4 h-10 leading-tight ${pageNumber === currentPage
+                  ? "text-indigo-600 border border-indigo-300 bg-indigo-50 hover:bg-indigo-100 hover:text-indigo-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-900 focus:bg-indigo-200 focus:text-slate-800"
+                  : "text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white focus:ring-2 focus:ring-indigo-900 focus:bg-indigo-200 focus:text-slate-800"
+                  }`}
               >
                 {pageNumber}
               </a>
@@ -99,7 +98,7 @@ export const Pagination = (props) => {
         <li onClick={onNext} disabled={currentPage === lastPage}>
           <a
             href="#"
-            className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white focus:ring-2 focus:ring-indigo-900 focus:bg-indigo-200 focus:text-slate-800"
           >
             <span className="sr-only">Next</span>
             <svg
