@@ -4,7 +4,7 @@ import ParticlesContainer from "../components/User/ParticuleContainer";
 const LandingPage = () => {
   return (
     <>
-      <div className="p-4 md:p-8 lg:p-10 gap-y-7 flex flex-col my-auto">
+      <div className="p-4 md:p-8 lg:p-10 gap-y-7 flex flex-col my-auto relative z-[1]">
         <h1 className="text-6xl sm:text-9xl font-spaceGrotesk">Fireball </h1>
         <h2 className="text-4xl sm:text-8xl font-spaceGrotesk ">
           Meteorite Strikes{" "}
