@@ -57,10 +57,10 @@ export const Pagination = (props) => {
             </svg>
           </a>
         </li>
-        {paginationRange.map((pageNumber) => {
+        {paginationRange.map((pageNumber, index) => {
           if (pageNumber === DOTS) {
             return (
-              <li>
+              <li key={`dot${index}`}>
                 <a
                   href="#"
                   aria-current="page"
@@ -73,7 +73,7 @@ export const Pagination = (props) => {
           }
 
           return (
-            <li onClick={() => onPageChange(pageNumber)}>
+            <li onClick={() => onPageChange(pageNumber)} key={`page${index}`}>
               <a
                 href="#"
                 aria-current="page"
