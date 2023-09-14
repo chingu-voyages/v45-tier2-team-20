@@ -1,47 +1,64 @@
 import { Card } from "../../UI/Card";
-import { Button } from "../../UI/Button";
-import { useEffect, useState, useMemo } from "react";
-import { HiChevronUp, HiChevronDown } from "react-icons/hi2";
+import { useState, useMemo } from "react";
 import { MeteoriteLine } from "./MeteoriteLine";
 import { MeteoriteLineLoading } from "./MeteoriteLineLoading";
 import { Pagination } from "../../UI/Pagination/Pagination";
-import { PUBLIC_API_URL, APP_TOKEN } from "../../../constants/urls";
 import { ToggleButton } from "../../UI/ToggleButton";
-import axios from "axios";
 import { useApiContext } from "../../../contexts/APIcontext";
 
 export const DataListComponent = () => {
-  const { filteredSearchInput } = useApiContext();
-  // const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [toggle, setToggle] = useState(false);
-
+  const { filteredSearchInput, loading } = useApiContext();
   const [currentPage, setCurrentPage] = useState(1);
+  const [sortBy, setSortBy] = useState({ column: "", order: "asc" }); // Added sorting state
 
   const PageSize = 9;
 
   const currentTableData = useMemo(() => {
+    const sortedData = [...filteredSearchInput];
+    if (sortBy.column) {
+      sortedData.sort((a, b) => {
+        const valA = a[sortBy.column];
+        const valB = b[sortBy.column];
+
+        // Handle numeric sorting (mass)
+        if (sortBy.column === "mass") {
+          return sortBy.order === "asc" ? valA - valB : valB - valA;
+        }
+
+        // Handle date sorting (year)
+        if (sortBy.column === "year") {
+          const dateA = new Date(valA);
+          const dateB = new Date(valB);
+          return sortBy.order === "asc" ? dateA - dateB : dateB - dateA;
+        }
+
+        // Default sorting for other columns (string sorting)
+        if (valA < valB) {
+          return sortBy.order === "asc" ? -1 : 1;
+        }
+        if (valA > valB) {
+          return sortBy.order === "asc" ? 1 : -1;
+        }
+        return 0;
+      });
+    }
+
+    console.log(sortedData); // Check the sorted data
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
-    return filteredSearchInput.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage, filteredSearchInput]);
+    return sortedData.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, filteredSearchInput, sortBy]);
 
-  const getAllMeteorite = () => {
-    setLoading(true);
-    setTimeout(() => {
-      axios
-        .get(PUBLIC_API_URL, { $$app_token: APP_TOKEN, $limit: 10 })
-        .then((res) => {
-          setLoading(false);
-          // setData(res.data);
-          setLoading(false);
-        });
-    }, 2000);
+  const handleToggleClick = (columnName) => {
+    if (sortBy.column === columnName) {
+      setSortBy({
+        column: columnName,
+        order: sortBy.order === "asc" ? "desc" : "asc",
+      });
+    } else {
+      setSortBy({ column: columnName, order: "asc" });
+    }
   };
-
-  useEffect(() => {
-    getAllMeteorite();
-  }, []);
 
   return (
     <div className="flex justify-between my-[120px] px-[20px]">
@@ -52,10 +69,22 @@ export const DataListComponent = () => {
               #{filteredSearchInput.length} Meteorites strikes
             </h3>
             <div className="flex">
-              <ToggleButton name={"Name"} />
-              <ToggleButton name={"Recclass"} />
-              <ToggleButton name={"Mass"} />
-              <ToggleButton name={"Year"} />
+              <ToggleButton
+                name={"Name"}
+                onClick={() => handleToggleClick("name")}
+              />
+              <ToggleButton
+                name={"Recclass"}
+                onClick={() => handleToggleClick("recclass")}
+              />
+              <ToggleButton
+                name={"Mass"}
+                onClick={() => handleToggleClick("mass")}
+              />
+              <ToggleButton
+                name={"Year"}
+                onClick={() => handleToggleClick("year")}
+              />
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 p-2 max-h-[600px] overflow-auto">

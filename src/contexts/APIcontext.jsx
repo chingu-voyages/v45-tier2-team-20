@@ -5,30 +5,45 @@ import { APP_TOKEN, PUBLIC_API_URL } from "../constants/urls";
 
 const ApiContext = createContext();
 
+const NUMBER = 40000;
+
 export function useApiContext() {
-    return useContext(ApiContext);
+  return useContext(ApiContext);
 }
 
 export function ApiContextProvider({ children }) {
-    const [meteoriteData, setMeteoriteData] = useState([]);
-    const [filteredSearchInput, setfilteredSearchInput] = useState(meteoriteData);
+  const [meteoriteData, setMeteoriteData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [filteredSearchInput, setfilteredSearchInput] = useState(meteoriteData);
 
-    const getMeteoriteDataWithAxios = async () => {
-        const response = await axios.get(PUBLIC_API_URL, { $$app_token: APP_TOKEN });
-        setMeteoriteData(response.data);
-    };
-
-    useEffect(() => {
-        getMeteoriteDataWithAxios();
-    }, []);
-
-    return (
-        <ApiContext.Provider value={{ meteoriteData, filteredSearchInput, setfilteredSearchInput }}>
-            {children}
-        </ApiContext.Provider>
+  const getMeteoriteDataWithAxios = async () => {
+    setLoading(true);
+    const response = await axios.get(
+      `${PUBLIC_API_URL}?$limit=${NUMBER}&$$app_token=${APP_TOKEN}`
     );
+    setMeteoriteData(response.data);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getMeteoriteDataWithAxios();
+  }, []);
+
+  return (
+    <ApiContext.Provider
+      value={{
+        meteoriteData,
+        filteredSearchInput,
+        setfilteredSearchInput,
+        loading,
+        setLoading,
+      }}
+    >
+      {children}
+    </ApiContext.Provider>
+  );
 }
 
 ApiContextProvider.propTypes = {
-    children: PropTypes.element
+  children: PropTypes.element,
 };
