@@ -9,27 +9,32 @@ import { FaArrowsAltH } from "react-icons/fa";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css"
+import "react-loading-skeleton/dist/skeleton.css";
 
 export const MeteoriteLine = ({ data }) => {
   const [country, setCountry] = useState("");
   const [loading, setLoading] = useState(false);
   const findCountry = () => {
     setLoading(true);
-    axios
-      .get(
-        `https://api.geoapify.com/v1/geocode/reverse?lat=${data.reclat}&lon=${data.reclong}&format=json&apiKey=1c6480fe81734704bb23de7a30a2a769`
-      )
-      .then((res) => {
-        setCountry(res.data.results[0].country);
-        setLoading(false);
-      });
+    if (data.reclong) {
+      axios
+        .get(
+          `https://api.geoapify.com/v1/geocode/reverse?lat=${data.reclat}&lon=${data.reclong}&format=json&apiKey=1c6480fe81734704bb23de7a30a2a769`
+        )
+        .then((res) => {
+          setCountry(res.data.results[0].country);
+          setLoading(false);
+        });
+    } else {
+      setCountry("no location");
+      setLoading(false);
+    }
   };
   useEffect(() => {
     findCountry();
   }, [data]);
   return (
-    <div className="w-full border-[1px] border-gray-300 flex p-5 rounded-md cursor-pointer hover:shadow-lg duration-100">
+    <div className="w-full border-[1px] border-gray-300 flex p-5 rounded-md duration-100">
       <div className="w-full">
         <div className="flex items-center space-x-6 mb-4 justify-between">
           {/* <div className={`w-24 h-24 bg-[#E7E7F0] rounded-md`}></div> */}
@@ -44,9 +49,7 @@ export const MeteoriteLine = ({ data }) => {
               <FaWeightHanging className="text-gray-400" />
               <span className="text-gray-400">Mass</span>
             </div>
-            <h3 className="font-semibold text-black text-md">
-              {data.mass}kg
-            </h3>
+            <h3 className="font-semibold text-black text-md">{data.mass}kg</h3>
           </div>
           <div className="">
             <div className="flex items-center space-x-3">
@@ -97,18 +100,14 @@ export const MeteoriteLine = ({ data }) => {
               <FaArrowsAltV className="text-gray-400" />
               <span className="text-gray-400">Reclat</span>
             </div>
-            <h3 className="font-semibold text-black text-md">
-              {data.reclat}
-            </h3>
+            <h3 className="font-semibold text-black text-md">{data.reclat}</h3>
           </div>
           <div className="">
             <div className="flex items-center space-x-3">
               <FaArrowsAltH className="text-gray-400" />
               <span className="text-gray-400">Reclong</span>
             </div>
-            <h3 className="font-semibold text-black text-md">
-              {data.reclong}
-            </h3>
+            <h3 className="font-semibold text-black text-md">{data.reclong}</h3>
           </div>
         </div>
       </div>
