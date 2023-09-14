@@ -1,7 +1,7 @@
 import { ComposableMap, Geographies, Geography, Marker } from "react-simple-maps"
-import {useEffect, useState} from "react";
-import {Tooltip} from "react-tooltip";
-import {useApiContext} from "../../../contexts/APIcontext.jsx";
+import { useEffect, useState } from "react";
+import { Tooltip } from "react-tooltip";
+import { useApiContext } from "../../../contexts/APIcontext.jsx";
 
 const geoUrl =
   "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json"
@@ -9,7 +9,7 @@ const geoUrl =
 export const GeoChart = () => {
   const [markers, setMarkers] = useState([])
   const [tooltipContent, setTooltipContent] = useState("")
-  const { filteredSearchInput } = useApiContext()
+  const { filteredSearchInput, loading } = useApiContext()
 
   const getMarkers = () => {
     let arr = []
@@ -41,35 +41,40 @@ export const GeoChart = () => {
   }
 
   return (
-    <div>
-      <ComposableMap>
-        <Geographies geography={geoUrl}>
-          {({ geographies }) =>
-            geographies.map((geo) => (
-              <Geography key={geo.rsmKey} geography={geo} />
-            ))
-          }
-        </Geographies>
-        {markers.map(({ name, recclass, mass, year, coordinates }) => (
-          coordinates[0] !== undefined && (
-            <Marker
-              key={name}
-              coordinates={coordinates}
-              className="my-anchor-element"
-              data-tooltip-html={tooltipContent}
-              onMouseEnter={() => {
-                showTooltip(name, recclass, mass, year)
-              }}
-              onMouseLeave={() => {
-                setTooltipContent("");
-              }}
-            >
-              <circle r={5} fill="#F00" stroke="#fff" strokeWidth={2} />
-            </Marker>
-          )
-        ))}
-      </ComposableMap>
-      <Tooltip anchorSelect=".my-anchor-element" place="top" />
-    </div>
+    <>
+      {!loading && (
+        <div>
+          <ComposableMap>
+            <Geographies geography={geoUrl}>
+              {({ geographies }) =>
+                geographies.map((geo) => (
+                  <Geography key={geo.rsmKey} geography={geo} />
+                ))
+              }
+            </Geographies>
+            {markers.map(({ name, recclass, mass, year, coordinates }) => (
+              coordinates[0] !== undefined && (
+                <Marker
+                  key={name}
+                  coordinates={coordinates}
+                  className="my-anchor-element"
+                  data-tooltip-html={tooltipContent}
+                  onMouseEnter={() => {
+                    showTooltip(name, recclass, mass, year)
+                  }}
+                  onMouseLeave={() => {
+                    setTooltipContent("");
+                  }}
+                >
+                  <circle r={5} fill="#F00" stroke="#fff" strokeWidth={2} />
+                </Marker>
+              )
+            ))}
+          </ComposableMap>
+          <Tooltip anchorSelect=".my-anchor-element" place="top" />
+        </div>
+      )}
+    </>
+
   )
 }

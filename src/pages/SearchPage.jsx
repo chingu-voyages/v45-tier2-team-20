@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { SearchComponent } from "../components/User/SearchComponent/SearchComponent";
 import { Card } from "../components/UI/Card";
 import { DataListComponent } from "../components/User/DataSummaryComponent/DataListComponent";
@@ -14,9 +15,11 @@ export const SearchPage = () => {
             <SearchComponent />
           </Card>
         </div>
-        <DataListComponent />
-        <SummaryMetricComponent />
-        <MetricsComponent />
+        <Suspense fallback={"Loading meteor data..."}>
+          <DataListComponent />
+          <SummaryMetricComponent />
+          <MetricsComponent />
+        </Suspense>
       </div>
     </ApiContextProvider>
   );
