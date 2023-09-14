@@ -49,7 +49,7 @@ export const MeteoriteLine = ({ data }) => {
               <FaWeightHanging className="text-gray-400" />
               <span className="text-gray-400">Mass</span>
             </div>
-            <h3 className="font-semibold text-black text-md">{data.mass}kg</h3>
+            <h3 className="font-semibold text-black text-md">{data.mass}g</h3>
           </div>
           <div className="">
             <div className="flex items-center space-x-3">
