@@ -86,3 +86,10 @@ Follow the steps below to effectively use "Fireball Meteorite Strikes-web app" a
    This will start a development server, and you can access the app by visiting the specified URL in your web browser.
 
 ## Deployment
+
+- Preview link
+https://fireball-meteorite-strikes-app.netlify.app/
+
+- Screenshot of the project
+
+![](./Fireball Meteorite Strikes.png)
